@@ -12,7 +12,7 @@ int main()
 
     printf("fd = %d/n", fd);
     
-    if (fd == ‐1)
+    if (fd == -1)
     {
         // print which type of error have in a code
         printf("Error Number % d\n", errno);
