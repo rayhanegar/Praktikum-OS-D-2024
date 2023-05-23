@@ -5,23 +5,19 @@
 pthread_mutex_t mutex1 = PTHREAD_MUTEX_INITIALIZER;
 int counter = 0;
 void *increase() {
-    pthread_mutex_lock( &mutex1 );
     int i;
     for(i=0; i<99999; i++) {
         counter++;
         printf("Counter value: %d\n",counter);      
     }
-    pthread_mutex_unlock( &mutex1 );
 }
 
 void *decrease() {
-    pthread_mutex_lock( &mutex1 );
     int i;
     for(i=0; i<99999; i++) {
         counter--;
         printf("Counter value: %d\n",counter);
     }
-    pthread_mutex_unlock( &mutex1 );
 }
 
 int main() {
