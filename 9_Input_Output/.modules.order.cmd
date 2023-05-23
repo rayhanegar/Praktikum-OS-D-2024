@@ -1,1 +1,0 @@
-savedcmd_/home/raambm/Dokumen/CollegeStuff/Asprak/demo-9/prak_sisop_2023/9_Input_Output/modules.order := {   echo /home/raambm/Dokumen/CollegeStuff/Asprak/demo-9/prak_sisop_2023/9_Input_Output/hello.o; :; } > /home/raambm/Dokumen/CollegeStuff/Asprak/demo-9/prak_sisop_2023/9_Input_Output/modules.order
