@@ -6,6 +6,7 @@
 
 int counter = 0;
 pthread_t tid[4];
+pthread_mutex_t mutex_lock = PTHREAD_MUTEX_INITIALIZER;
 
 void *doSomeThing(void *arg)
 {
