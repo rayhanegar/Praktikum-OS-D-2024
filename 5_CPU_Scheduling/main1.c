@@ -1,25 +1,25 @@
 #include <stdio.h>
 #include <string.h>
 
-int main()
-{
-    // n= banyak proses, AT= Arrival Time, WT= Waiting Time, TAT= TurnAround Time
-    // b= burst time, TotWT= Total Waiting Time, TotTA= Total TurnAround time
-    // name= nama proses, AvWT= Average Waiting Time, AvTA= Average TurnAround time
+int main() {
+
+    /* n=Banyak proses, AT=Arrival Time, WT=Waiting Time, TAT=Turnaround Time
+    b=Burst Time, TotWT=Total Waiting Time, TotTA=Total Turnaround Time
+    name=Nama Proses, AWT=Average Waiting Time, AvTA=Average Turnaround time*/
+
     int n, AT[100], b[100], i, j, tmp, WT[100], TAT[100], time[100];
-    int TotWT = 0, TotTA = 0;
+    int TotWT=0, TotTA=0;
     float AvWT, AvTA;
     char name[20][20], tmpName[20];
 
-    printf("\t Algoritma CPU Scheduling FCFS \n");
+    printf("\n\tAlgoritma CPU Scheduling FCFS \n");
     puts("");
     printf("Jumlah Proses\t= ");
     scanf("%d", &n);
     puts("");
 
     // Masukkan data yang diproses
-    for (i = 0; i < n; i++)
-    {
+    for (i=0; i<n; i++) {
         fflush(stdin);
         printf("Nama Proses\t= ");
         scanf("%s", name[i]);
@@ -30,28 +30,28 @@ int main()
         puts("");
     }
 
-    // Urutkan Data
-    for (i = 0; i < n; i++)
-    {
-        for (j = i + 1; j < n; j++)
-            if (AT[i] > AT[j])
-            {
+    // Urutkan data
+    for (i=0; i<n; i++) {
+        for (j=i+1; j<n; j++) {
+            if (AT[i] > AT[j]) {
 
-                // tukar nama
+                // Tukar nama proses
                 strcpy(tmpName, name[i]);
                 strcpy(name[i], name[j]);
                 strcpy(name[j], tmpName);
 
-                // tukar arrival time
+                // Tukar arrival time
                 tmp = AT[i];
                 AT[i] = AT[j];
                 AT[j] = tmp;
 
-                // tukar burst
+                // Tukar burst time
                 tmp = b[i];
                 b[i] = b[j];
                 b[j] = tmp;
+
             }
+        }
     }
 
     time[0] = AT[0];
@@ -60,12 +60,12 @@ int main()
     printf("| no | proses\t | time arrival\t | burst |\n");
     puts("——————————————————————————————————————————");
 
-    for (i = 0; i < n; i++)
-    {
-        printf("| %2d | %s\t | \t%d\t | %d\t |\n", i + 1, name[i], AT[i], b[i]);
-        time[i + 1] = time[i] + b[i]; // menghitung time pada gant chart
+    for (i=0; i<n; i++) {
+        printf("| %2d | %s\t | \t%d\t | %d\t |\n", i+1, name[i], AT[i], b[i]);
+        
+        time[i+1] = time[i] + b[i]; // Menghitung waktu sekarang pada Gantt Chart (waktu sebelumnya + burst time)
         WT[i] = time[i] - AT[i];
-        TAT[i] = time[i + 1] - AT[i];
+        TAT[i] = time[i+1] - AT[i];
         TotWT += WT[i];
         TotTA += TAT[i];
     }
@@ -84,30 +84,27 @@ int main()
     }
 
     puts("==================================================");
-    // untuk Gant Chart
+    // Untuk Gantt Chart
     puts("\n");
-    puts("\t Gant-Chart \n");
-    for (i = 0; i < n; i++)
-    {
+    puts("\t Gantt-Chart \n");
+    for (i=0; i<n; i++) {
         printf(" %s\t ", name[i]);
     }
 
     puts("");
-    for (i = 0; i < n; i++)
-    {
+    for (i=0; i<n; i++) {
         printf("|=========");
     }
 
     printf("|\n");
-    for (i = 0; i <= n; i++)
-    {
+    for (i=0; i<=n; i++) {
         printf(" %d\t ", time[i]);
     }
 
-    printf("//diperoleh dari penjumlahan Burst");
-    puts("\n");
+    printf("\ndiperoleh dari penjumlahan Burst time");
+    puts("/n");
     AvWT = (float)TotWT / n;
     AvTA = (float)TotTA / n;
-    printf("\tAverage Waiting Time : %f\n", AvWT);
-    printf("\tAverage Turn Around TIme : %f\n", AvTA);
+    printf("\tAverage Waiting Time: %f\n", AvWT);
+    printf("\tAverage Turn Around Time: %f\n", AvTA);
 }
